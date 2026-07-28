@@ -1,0 +1,92 @@
+package com.scm.eis.serviceImpl;
+
+import com.scm.eis.constant.SolutionStatus;
+import com.scm.eis.entity.ChatBoat;
+import com.scm.eis.repository.ChatBoatRepository;
+import com.scm.eis.service.ChatBoatService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ChatBoatServiceImpl implements ChatBoatService {
+
+    @Autowired
+    ChatBoatRepository chatBoatRepository;
+
+
+    @Override
+    public void userAskedQueryByChatBoat(ChatBoat chatBoat) {
+        chatBoatRepository.save(chatBoat);
+    }
+
+    @Override
+    public ChatBoat findByUserIdAndActiveTrue(Long userId) {
+        return chatBoatRepository.findByUserIdAndActiveTrue(userId);
+    }
+
+    @Override
+    public Optional<ChatBoat> findByConsumerIdAndActiveTrueAndSolutionStatus(String consumerId) {
+        return chatBoatRepository.findByConsumerIdAndActiveTrueAndSolutionStatus(consumerId);
+    }
+
+    @Override
+    public Optional<ChatBoat> findByActiveTrueAndNotificationReadTrueAndUserConsumerId(String consumerId) {
+        return chatBoatRepository.findByActiveTrueAndNotificationReadTrueAndUserConsumerId(consumerId);
+    }
+
+    @Override
+    public List<ChatBoat> findUnreadNotifications() {
+
+        return  chatBoatRepository.findUnreadNotifications();
+    }
+
+    @Override
+    public List<ChatBoat> getChatBoatComplainListResponse() {
+        return chatBoatRepository.getChatBoatComplainListResponse();
+    }
+
+    @Override
+    public ChatBoat findByTicketNumberAndActiveTrue(String ticketNumber) {
+        return chatBoatRepository.findByTicketNumberAndActiveTrue(ticketNumber);
+    }
+
+    @Override
+    public Long countActivePendingSolutions() {
+        return chatBoatRepository.countActivePendingSolutions();
+    }
+
+    @Override
+    public Long countActiveResolvedSolutions() {
+        return chatBoatRepository.countActiveResolvedSolutions();
+    }
+
+    @Override
+    public Long countActiveCreatedSolutions() {
+        return chatBoatRepository.countActiveCreatedSolutions();
+    }
+
+    @Override
+    public Long countActiveRejectedSolutions() {
+        return chatBoatRepository.countActiveRejectedSolutions();
+    }
+
+    @Override
+    public Long countActiveoNHoldSolutions() {
+        return chatBoatRepository.countActiveoNHoldSolutions();
+    }
+
+    @Override
+    public Long countActiveinProgressSolutions() {
+        return chatBoatRepository.countActiveinProgressSolutions();
+    }
+
+    @Override
+    public Long countActiveApprovedSolutions() {
+        return chatBoatRepository.countActiveApprovedSolutions();
+    }
+
+}
